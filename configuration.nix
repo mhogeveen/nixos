@@ -56,6 +56,13 @@
     eza
     lazygit
     zoxide
+    opencode
+    jq
+    wl-clipboard
+
+    # screenshots
+    grim
+    slurp
 
     # neovim requirements
     neovim
@@ -66,6 +73,8 @@
     gcc
     tree-sitter
     nodejs
+    unzip
+    go
   ];
 
   fonts.packages = with pkgs; [
