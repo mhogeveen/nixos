@@ -40,7 +40,7 @@
       "lg" = "lazygit";
       "n" = "nvim";
       "e" = "exit";
-      "nrs" = "sudo nixos-rebuild switch --flake ~/.nixos#prometheus";
+      "nrs" = "sudo nixos-rebuild switch --flake 'git+file:///home/maarten/.nixos?submodules=1#prometheus'";
     };
     initContent = ''
       source ~/.nixos/config/zsh/.config/zsh/prompt.zsh
