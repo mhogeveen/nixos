@@ -42,6 +42,7 @@
 
   programs.firefox.enable = true;
   programs.niri.enable = true;
+  programs.mango.enable = true;
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
