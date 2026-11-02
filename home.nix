@@ -61,4 +61,5 @@
   };
 
   home.file.".config/nvim".source = ./config/neovim/.config/nvim;
+  home.file.".config/fuzzel".source = ./config/fuzzel/.config/fuzzel;
 }
