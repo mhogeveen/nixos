@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./cursor.nix
     ./git.nix
     ./zsh.nix
     ./neovim.nix

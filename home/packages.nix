@@ -1,9 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # terminals / launcher
-    ghostty
-    alacritty
+    # launcher
     fuzzel
 
     # cli
@@ -17,6 +15,7 @@
     opencode
     ripgrep
     unzip
+    yazi
 
     # screenshots
     grim
