@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     # launcher
@@ -22,6 +22,8 @@
     slurp
   ];
 
-  xdg.configFile."fuzzel".source = ../config/fuzzel/.config/fuzzel;
-  xdg.configFile."mango".source = ../config/mango/.config/mango;
+  xdg.configFile."fuzzel".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/fuzzel/.config/fuzzel";
+  xdg.configFile."mango".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/mango/.config/mango";
 }

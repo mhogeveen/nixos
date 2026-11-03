@@ -11,15 +11,8 @@
 
     # Only available on Neovim's PATH, not globally.
     extraPackages = with pkgs; [
-      fzf
       luarocks
-      ripgrep
-      fd
-      gcc
       tree-sitter
-      nodejs
-      unzip
-      go
     ];
   };
 
