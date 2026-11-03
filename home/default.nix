@@ -2,6 +2,7 @@
 {
   imports = [
     ./cursor.nix
+    ./foot.nix
     ./git.nix
     ./zsh.nix
     ./neovim.nix
