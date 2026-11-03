@@ -2,6 +2,8 @@
   description = "NixOS";
 
   inputs = {
+    self.submodules = true;
+
     nixpkgs.url = "nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -13,22 +15,30 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, mangowm, ... }: {
-    nixosConfigurations.prometheus = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.maarten = import ./home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-	mangowm.nixosModules.mango
-      ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      mangowm,
+      ...
+    }:
+    {
+      nixosConfigurations.prometheus = nixpkgs.lib.nixosSystem {
+        modules = [
+          ./hosts/prometheus
+          mangowm.nixosModules.mango
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.maarten = import ./home;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
     };
-  };
 }
