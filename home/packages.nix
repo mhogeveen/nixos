@@ -23,4 +23,5 @@
   ];
 
   xdg.configFile."fuzzel".source = ../config/fuzzel/.config/fuzzel;
+  xdg.configFile."mango".source = ../config/mango/.config/mango;
 }
