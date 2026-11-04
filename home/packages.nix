@@ -16,6 +16,7 @@
     ripgrep
     unzip
     yazi
+    btop
 
     # screenshots
     grim

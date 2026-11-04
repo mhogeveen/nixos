@@ -7,6 +7,7 @@
     ./zsh.nix
     ./neovim.nix
     ./packages.nix
+    ./qutebrowser.nix
   ];
 
   home.username = "maarten";
