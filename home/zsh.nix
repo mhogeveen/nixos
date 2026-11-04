@@ -17,6 +17,12 @@
       expireDuplicatesFirst = true;
     };
 
+    historySubstringSearch = {
+      enable = true;
+      searchDownKey = "^n";
+      searchUpKey = "^p";
+    };
+
     shellAliases = {
       "ls" = "eza -a";
       "-- -" = "cd -";
