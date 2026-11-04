@@ -7,6 +7,12 @@
       auto_save = {
 	session = true;
       };
+      completion = {
+	delay = 300;
+	height = "25%";
+	min_chars = 2;
+	shrink = true;
+      };
       content = {
 	blocking = {
 	  enabled = true;
