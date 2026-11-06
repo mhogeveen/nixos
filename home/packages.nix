@@ -14,6 +14,7 @@
     nodejs
     opencode
     ripgrep
+    rustup
     unzip
     yazi
     btop
@@ -22,6 +23,8 @@
     grim
     slurp
   ];
+
+  home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
 
   xdg.configFile."fuzzel".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/fuzzel/.config/fuzzel";
