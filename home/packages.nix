@@ -4,6 +4,12 @@
     # launcher
     fuzzel
 
+    # clipboard history, recorded and shown by the amane shell
+    cliphist
+
+    # notify-send; the amane shell itself is the notification daemon
+    libnotify
+
     # cli
     fd
     fzf
@@ -30,4 +36,6 @@
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/fuzzel/.config/fuzzel";
   xdg.configFile."mango".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/mango/.config/mango";
+  xdg.configFile."amane".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/amane/.config/amane";
 }

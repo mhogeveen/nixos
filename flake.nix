@@ -13,6 +13,7 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    amane.url = "github:MystiaFin/amane";
   };
 
   outputs =
@@ -21,9 +22,10 @@
       home-manager,
       mangowm,
       ...
-    }:
+    }@inputs:
     {
       nixosConfigurations.prometheus = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/prometheus
           mangowm.nixosModules.mango

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -51,6 +51,10 @@
   programs.mango.enable = true;
   programs.zsh.enable = true;
 
+  # Provides the generic linux dynamic loader so prebuilt binaries (e.g. Mason's
+  # language servers in Neovim) can run.
+  programs.nix-ld.enable = true;
+
   programs.nh = {
     enable = true;
     flake = "/home/maarten/.nixos";
@@ -67,6 +71,7 @@
     wget
     wl-clipboard
     noctalia
+    inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   fonts.packages = with pkgs; [
