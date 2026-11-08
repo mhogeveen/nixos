@@ -24,6 +24,7 @@
     unzip
     yazi
     btop
+    rtk
 
     # screenshots
     grim
