@@ -29,8 +29,8 @@
     enable = true;
     powerOnBoot = false;
   };
-  services.blueman.enable = true;
 
+  services.blueman.enable = true;
   services.displayManager.ly.enable = true;
   services.keyd = {
     enable = true;
@@ -39,6 +39,7 @@
       settings.main.capslock = "overload(control, esc)";
     };
   };
+  services.tailscale.enable = true;
 
   users.users.maarten = {
     isNormalUser = true;
