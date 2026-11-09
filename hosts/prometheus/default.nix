@@ -29,6 +29,7 @@
     enable = true;
     powerOnBoot = false;
   };
+  hardware.i2c.enable = true;
 
   services.blueman.enable = true;
   services.displayManager.ly.enable = true;
@@ -73,6 +74,7 @@
     wl-clipboard
     noctalia
     inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ddcutil
   ];
 
   fonts.packages = with pkgs; [
