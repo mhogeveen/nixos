@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 {
   home.packages = with pkgs; [
     # launcher
@@ -19,6 +24,7 @@
     lazygit
     nodejs
     opencode
+    pkgs-unstable.claude-code
     ripgrep
     rustup
     unzip
