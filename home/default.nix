@@ -9,6 +9,7 @@
     ./neovim.nix
     ./packages.nix
     ./qutebrowser.nix
+    ./satty.nix
   ];
 
   home.username = "maarten";
