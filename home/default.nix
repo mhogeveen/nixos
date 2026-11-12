@@ -4,12 +4,13 @@
     ./cursor.nix
     ./foot.nix
     ./git.nix
+    ./gtk.nix
     ./hypridle.nix
-    ./zsh.nix
     ./neovim.nix
     ./packages.nix
     ./qutebrowser.nix
     ./satty.nix
+    ./zsh.nix
   ];
 
   home.username = "maarten";

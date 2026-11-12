@@ -6,6 +6,10 @@
 }:
 {
   home.packages = with pkgs; [
+    # apps
+    vlc
+    pcmanfm
+
     # launcher
     fuzzel
 
@@ -32,9 +36,10 @@
     btop
     rtk
 
-    # screenshots
+    # screenshots and screen recordings (the shell's screenshot menu)
     grim
     slurp
+    wf-recorder
   ];
 
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
