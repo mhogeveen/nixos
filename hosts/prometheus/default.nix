@@ -7,6 +7,17 @@
     efiSupport = true;
     device = "nodev"; # EFI only, no MBR install
     configurationLimit = 10;
+    theme = pkgs.callPackage ./grub-theme { };
+    gfxmodeEfi = "3840x2160,auto"; # native 4K; non-native modes get upscaled and blurry
+    gfxpayloadEfi = "keep";
+    splashImage = null; # theme draws a plain black background
+    backgroundColor = "#000000";
+    # Runs at the start of every entry, before GRUB loads kernel + initrd (takes a few seconds):
+    # wipe GRUB's built-in "Booting `NixOS'" line and show our own message instead
+    extraPerEntryConfig = ''
+      clear
+      echo "Loading kernel..."
+    '';
     # useOSProber = true; # enable only if dual-booting
   };
   boot.loader.efi.canTouchEfiVariables = true;
