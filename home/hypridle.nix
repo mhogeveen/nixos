@@ -7,6 +7,10 @@ in
 {
   services.hypridle = {
     enable = true;
+    # the NixOS session wrapper brings up graphical-session.target before mango
+    # has exported WAYLAND_DISPLAY, so hypridle would be skipped; mango-session
+    # starts once the compositor is up
+    systemdTarget = "mango-session.target";
 
     settings = {
       general = {

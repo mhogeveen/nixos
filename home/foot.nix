@@ -3,7 +3,11 @@
   programs.foot = {
     enable = true;
 
-    server.enable = true;
+    server = {
+      enable = true;
+      # start after mango is up, see hypridle.nix
+      systemdTarget = "mango-session.target";
+    };
 
     settings = {
       main = {
