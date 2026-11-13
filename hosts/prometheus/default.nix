@@ -2,9 +2,12 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  boot.loader.systemd-boot = {
+  boot.loader.grub = {
     enable = true;
+    efiSupport = true;
+    device = "nodev"; # EFI only, no MBR install
     configurationLimit = 10;
+    # useOSProber = true; # enable only if dual-booting
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
