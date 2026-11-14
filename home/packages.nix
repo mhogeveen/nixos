@@ -11,9 +11,6 @@
     vlc
     pcmanfm
 
-    # launcher
-    fuzzel
-
     # clipboard history, recorded and shown by the amane shell
     cliphist
 
@@ -44,8 +41,6 @@
 
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
 
-  xdg.configFile."fuzzel".source =
-    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/fuzzel/.config/fuzzel";
   xdg.configFile."mango".source =
     config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/mango/.config/mango";
   xdg.configFile."amane".source =
