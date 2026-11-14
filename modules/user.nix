@@ -1,0 +1,29 @@
+# per-user constants shared by the NixOS and home-manager config, set per host;
+# home-manager modules read them as osConfig.user.*
+{ lib, ... }:
+let
+  inherit (lib) mkOption types;
+in
+{
+  options.user = {
+    name = mkOption {
+      type = types.passwdEntry types.str;
+      description = "The login name of the user this host is set up for.";
+      example = "maarten";
+    };
+
+    location = {
+      latitude = mkOption {
+        type = types.numbers.between (-90) 90;
+        description = "Where this host usually is, in degrees north (for sunset times).";
+        example = 52.2;
+      };
+
+      longitude = mkOption {
+        type = types.numbers.between (-180) 180;
+        description = "Where this host usually is, in degrees east (for sunset times).";
+        example = 5.2;
+      };
+    };
+  };
+}

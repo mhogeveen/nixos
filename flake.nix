@@ -42,18 +42,22 @@
       nixosConfigurations.prometheus = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs pkgs-unstable; };
         modules = [
+          ./modules/user.nix
           ./hosts/prometheus
           mangowm.nixosModules.mango
           home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs pkgs-unstable; };
-              users.maarten = import ./home;
-              backupFileExtension = "backup";
-            };
-          }
+          (
+            { config, ... }:
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs pkgs-unstable; };
+                users.${config.user.name} = import ./home;
+                backupFileExtension = "backup";
+              };
+            }
+          )
         ];
       };
 

@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -26,6 +31,13 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
+
+  # modules/user.nix
+  user.name = "maarten";
+  user.location = {
+    latitude = 52.2;
+    longitude = 5.2;
+  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -56,9 +68,12 @@
   };
   services.tailscale.enable = true;
 
-  users.users.maarten = {
+  users.users.${config.user.name} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
@@ -73,7 +88,7 @@
 
   programs.nh = {
     enable = true;
-    flake = "/home/maarten/.nixos";
+    flake = "${config.users.users.${config.user.name}.home}/.nixos";
     clean = {
       enable = true;
       extraArgs = "--keep-since 14d --keep 5";
