@@ -14,7 +14,10 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    amane.url = "github:MystiaFin/amane";
+    amane = {
+      url = "github:MystiaFin/amane";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -27,15 +30,16 @@
     let
       system = "x86_64-linux";
 
-      # A separate nixpkgs instantiation does not inherit the system-level
-      # nixpkgs.config, so the unfree allowlist is repeated here.
+      # The one unfree allowlist, applied to both the system nixpkgs and
+      # pkgs-unstable (a separate instantiation doesn't inherit nixpkgs.config).
+      unfreePackages = [
+        "claude-code"
+      ];
+      allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) unfreePackages;
+
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
-        config.allowUnfreePredicate =
-          pkg:
-          builtins.elem (nixpkgs.lib.getName pkg) [
-            "claude-code"
-          ];
+        config = { inherit allowUnfreePredicate; };
       };
     in
     {
@@ -49,6 +53,8 @@
           (
             { config, ... }:
             {
+              nixpkgs.config = { inherit allowUnfreePredicate; };
+
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

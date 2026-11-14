@@ -34,6 +34,7 @@
 
   # modules/user.nix
   user.name = "maarten";
+  user.flakeDir = "${config.users.users.${config.user.name}.home}/.nixos";
   user.location = {
     latitude = 52.2;
     longitude = 5.2;
@@ -78,9 +79,23 @@
   };
 
   programs.firefox.enable = true;
-  programs.niri.enable = true;
   programs.mango.enable = true;
-  programs.zsh.enable = true;
+
+  # dconf's D-Bus service; home-manager writes the GTK dark mode and cursor
+  # settings (gtk.nix, cursor.nix) into it. niri used to enable this implicitly
+  programs.dconf.enable = true;
+  programs.zsh = {
+    enable = true;
+    # home-manager's zsh runs compinit already; running it here too slows startup
+    enableGlobalCompInit = false;
+  };
+
+  # realtime scheduling for PipeWire (enabled by the graphical desktop defaults)
+  security.rtkit.enable = true;
+
+  services.fwupd.enable = true;
+  zramSwap.enable = true;
+  boot.tmp.cleanOnBoot = true;
 
   # Provides the generic linux dynamic loader so prebuilt binaries (e.g. Mason's
   # language servers in Neovim) can run.
@@ -88,7 +103,7 @@
 
   programs.nh = {
     enable = true;
-    flake = "${config.users.users.${config.user.name}.home}/.nixos";
+    flake = config.user.flakeDir;
     clean = {
       enable = true;
       extraArgs = "--keep-since 14d --keep 5";
@@ -101,7 +116,6 @@
   environment.systemPackages = with pkgs; [
     wget
     wl-clipboard
-    noctalia
     inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default
     ddcutil
   ];
@@ -115,6 +129,8 @@
     "flakes"
   ];
   nix.optimise.automatic = true;
+  # flakes only: <nixpkgs> and nix-shell -p resolve through the flake registry
+  nix.channel.enable = false;
 
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.

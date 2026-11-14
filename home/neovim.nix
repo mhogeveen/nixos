@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   lib,
   pkgs,
   ...
@@ -22,5 +23,5 @@
 
   # Out-of-store symlink so edits apply immediately and lazy.nvim can write lazy-lock.json.
   xdg.configFile."nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/neovim/.config/nvim";
+    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/neovim/.config/nvim";
 }

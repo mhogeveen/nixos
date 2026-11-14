@@ -1,4 +1,4 @@
-{ ... }:
+{ osConfig, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -33,8 +33,10 @@
       "nrs" = "nh os switch";
     };
 
+    # read from the checkout at runtime (not a store copy), so prompt edits
+    # apply in new shells without a rebuild, like the other dotfiles
     initContent = ''
-      source ${../config/zsh/.config/zsh/prompt.zsh}
+      source ${osConfig.user.flakeDir}/config/zsh/.config/zsh/prompt.zsh
     '';
   };
 

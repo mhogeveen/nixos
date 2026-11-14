@@ -12,6 +12,12 @@ in
       example = "maarten";
     };
 
+    flakeDir = mkOption {
+      type = types.str;
+      description = "Where this flake is checked out (for nh and out-of-store dotfile links).";
+      example = "/home/maarten/.nixos";
+    };
+
     location = {
       latitude = mkOption {
         type = types.numbers.between (-90) 90;

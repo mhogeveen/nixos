@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   pkgs,
   pkgs-unstable,
   ...
@@ -21,7 +22,6 @@
 
     # cli
     fd
-    fzf
     gcc
     go
     jq
@@ -45,9 +45,9 @@
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
 
   xdg.configFile."fuzzel".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/fuzzel/.config/fuzzel";
+    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/fuzzel/.config/fuzzel";
   xdg.configFile."mango".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/mango/.config/mango";
+    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/mango/.config/mango";
   xdg.configFile."amane".source =
-    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.nixos/config/amane/.config/amane";
+    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/amane/.config/amane";
 }
