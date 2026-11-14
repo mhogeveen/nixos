@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -116,7 +117,30 @@
   environment.systemPackages = with pkgs; [
     wget
     wl-clipboard
-    inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # amane's own wrapper bundles cargo + rustc (~1.6 GiB) so its CLI can build the config;
+    # re-wrap it without them so it uses the rustup toolchain from home/packages.nix instead
+    (inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
+      postFixup =
+        let
+          libraries = with pkgs; [
+            fontconfig
+            freetype
+            expat
+            wayland
+            libxkbcommon
+            vulkan-loader
+            libpulseaudio
+            linux-pam
+          ];
+        in
+        ''
+          wrapProgram $out/bin/amane \
+            --prefix PATH : ${lib.makeBinPath [ pkgs.pkg-config pkgs.stdenv.cc ]} \
+            --prefix PKG_CONFIG_PATH : ${lib.makeSearchPathOutput "dev" "lib/pkgconfig" libraries} \
+            --prefix LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.linux-pam ]} \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.vulkan-loader pkgs.wayland ]}
+        '';
+    }))
     ddcutil
   ];
 
@@ -129,6 +153,9 @@
     "flakes"
   ];
   nix.optimise.automatic = true;
+
+  # enabled by default on graphical desktops; pulls in ~1.2 GiB of TTS voices
+  services.speechd.enable = false;
   # flakes only: <nixpkgs> and nix-shell -p resolve through the flake registry
   nix.channel.enable = false;
 

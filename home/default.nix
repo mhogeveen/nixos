@@ -8,7 +8,6 @@
     ./hypridle.nix
     ./neovim.nix
     ./packages.nix
-    ./qutebrowser.nix
     ./satty.nix
     ./wlsunset.nix
     ./zsh.nix

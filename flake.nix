@@ -16,7 +16,7 @@
     };
     amane = {
       url = "github:MystiaFin/amane";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
