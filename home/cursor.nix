@@ -5,7 +5,8 @@
   home.pointerCursor = {
     package = pkgs.adwaita-icon-theme;
     name = "Adwaita";
-    size = 24;
+    # the same size as mango's cursor_size (mango.nix)
+    size = 20;
     gtk.enable = true;
     x11.enable = true;
   };

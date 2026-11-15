@@ -41,8 +41,6 @@
 
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
 
-  xdg.configFile."mango".source =
-    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/mango/.config/mango";
   xdg.configFile."amane".source =
     config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/amane/.config/amane";
 }
