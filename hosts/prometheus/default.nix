@@ -28,9 +28,8 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # HP's BIOS-settings driver: its WMI queries fail on this box and freeze the
-  # whole machine for ~17 s during boot. only /sys/class/firmware-attributes
-  # (BIOS settings from Linux) is lost
+  # HP's BIOS-settings driver: its WMI queries fail on this box (ACPI errors
+  # at every boot); only /sys/class/firmware-attributes is lost
   boot.blacklistedKernelModules = [ "hp_bioscfg" ];
 
   networking.hostName = "prometheus";

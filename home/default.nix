@@ -4,6 +4,7 @@
     ./cursor.nix
     ./delta.nix
     ./eza.nix
+    ./firefox.nix
     ./foot.nix
     ./fzf.nix
     ./git.nix

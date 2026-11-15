@@ -19,6 +19,11 @@
       url = "github:Aejkatappaja/cendre";
       flake = false;
     };
+    # arkenfox's hardened user.js; home/firefox.nix appends our overrides
+    arkenfox = {
+      url = "github:arkenfox/user.js";
+      flake = false;
+    };
     amane = {
       url = "github:MystiaFin/amane";
       inputs.nixpkgs.follows = "nixpkgs";
