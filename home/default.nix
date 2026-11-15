@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./btop.nix
     ./cursor.nix
     ./delta.nix
     ./eza.nix
@@ -16,6 +17,7 @@
     ./packages.nix
     ./satty.nix
     ./wlsunset.nix
+    ./yazi.nix
     ./zoxide.nix
     ./zsh.nix
   ];

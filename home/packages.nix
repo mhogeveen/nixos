@@ -28,8 +28,6 @@
     ripgrep
     rustup
     unzip
-    yazi
-    btop
     rtk
 
     # screenshots and screen recordings (the shell's screenshot menu)
