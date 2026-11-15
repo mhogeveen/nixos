@@ -28,6 +28,11 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # HP's BIOS-settings driver: its WMI queries fail on this box and freeze the
+  # whole machine for ~17 s during boot. only /sys/class/firmware-attributes
+  # (BIOS settings from Linux) is lost
+  boot.blacklistedKernelModules = [ "hp_bioscfg" ];
+
   networking.hostName = "prometheus";
   networking.networkmanager.enable = true;
 
@@ -59,7 +64,6 @@
   };
   hardware.i2c.enable = true;
 
-  services.blueman.enable = true;
   services.displayManager.ly.enable = true;
   services.keyd = {
     enable = true;
@@ -79,7 +83,24 @@
     shell = pkgs.zsh;
   };
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    # shown under about:policies
+    policies = {
+      DisableTelemetry = true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      FirefoxHome = {
+        SponsoredTopSites = false;
+        SponsoredPocket = false;
+        SponsoredStories = false;
+      };
+      ExtensionSettings."uBlock0@raymondhill.net" = {
+        installation_mode = "force_installed";
+        install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+      };
+    };
+  };
   programs.mango.enable = true;
 
   # dconf's D-Bus service; home-manager writes the GTK dark mode and cursor
@@ -95,7 +116,20 @@
   security.rtkit.enable = true;
 
   services.fwupd.enable = true;
-  zramSwap.enable = true;
+  # SMART checks on the one SSD; warnings land in the journal
+  services.smartd.enable = true;
+
+  # 6.7 GiB of RAM: let zram (zstd) grow to the size of RAM and prefer it over
+  # dropping file cache; the disk swap stays as the lower-priority fallback
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+  };
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 180;
+    # zram has no seek cost, so no swap readahead
+    "vm.page-cluster" = 0;
+  };
   boot.tmp.cleanOnBoot = true;
 
   # Provides the generic linux dynamic loader so prebuilt binaries (e.g. Mason's
@@ -135,13 +169,25 @@
         in
         ''
           wrapProgram $out/bin/amane \
-            --prefix PATH : ${lib.makeBinPath [ pkgs.pkg-config pkgs.stdenv.cc ]} \
+            --prefix PATH : ${
+              lib.makeBinPath [
+                pkgs.pkg-config
+                pkgs.stdenv.cc
+              ]
+            } \
             --prefix PKG_CONFIG_PATH : ${lib.makeSearchPathOutput "dev" "lib/pkgconfig" libraries} \
             --prefix LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.linux-pam ]} \
-            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ pkgs.vulkan-loader pkgs.wayland ]}
+            --prefix LD_LIBRARY_PATH : ${
+              lib.makeLibraryPath [
+                pkgs.vulkan-loader
+                pkgs.wayland
+              ]
+            }
         '';
     }))
     ddcutil
+    pciutils
+    usbutils
   ];
 
   fonts.packages = with pkgs; [
@@ -153,6 +199,11 @@
     "flakes"
   ];
   nix.optimise.automatic = true;
+  # 4 slow cores: builds run at idle priority, two at a time, so the desktop
+  # stays usable during a rebuild (amane's Rust build is the heavy one)
+  nix.settings.max-jobs = 2;
+  nix.daemonCPUSchedPolicy = "idle";
+  nix.daemonIOSchedClass = "idle";
 
   # enabled by default on graphical desktops; pulls in ~1.2 GiB of TTS voices
   services.speechd.enable = false;

@@ -9,8 +9,8 @@
     syntaxHighlighting.enable = true;
 
     history = {
-      size = 5000;
-      save = 5000;
+      size = 50000;
+      save = 50000;
       share = true;
       ignoreAllDups = true;
       ignoreSpace = true;
@@ -31,6 +31,8 @@
       "n" = "nvim";
       "e" = "exit";
       "nrs" = "nh os switch";
+      # update every flake input, then rebuild
+      "nfu" = "nh os switch --update";
     };
 
     # read from the checkout at runtime (not a store copy), so prompt edits
