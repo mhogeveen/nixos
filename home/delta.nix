@@ -11,6 +11,8 @@
       line-numbers = true;
       # n and N jump between files in the pager
       navigate = true;
+      # file names and commit hashes become clickable (OSC 8) in foot
+      hyperlinks = true;
 
       # cendre (hard), https://github.com/Aejkatappaja/cendre
       syntax-theme = "cendre";

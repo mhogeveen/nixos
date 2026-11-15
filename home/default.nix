@@ -3,7 +3,9 @@
   imports = [
     ./cursor.nix
     ./delta.nix
+    ./eza.nix
     ./foot.nix
+    ./fzf.nix
     ./git.nix
     ./gtk.nix
     ./hypridle.nix
@@ -13,6 +15,7 @@
     ./packages.nix
     ./satty.nix
     ./wlsunset.nix
+    ./zoxide.nix
     ./zsh.nix
   ];
 

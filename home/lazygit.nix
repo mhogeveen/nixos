@@ -4,16 +4,27 @@
     enable = true;
 
     settings = {
-      # delta (delta.nix) renders the diffs, with the options from git config
-      git.diffRenderers = [
-        {
-          colorArg = "always";
-          command = "${config.programs.delta.package}/bin/delta --paging=never";
-        }
-      ];
+      # delta (delta.nix) renders the diffs, with the options from git config;
+      # | switches to the side-by-side one when the panel is wide enough
+      git.diffRenderers =
+        map
+          (args: {
+            colorArg = "always";
+            command = "${config.programs.delta.package}/bin/delta --paging=never${args}";
+          })
+          [
+            ""
+            " --side-by-side"
+          ];
+
+      # e opens the file in nvim at the selected line
+      os.editPreset = "nvim";
+      # straight back to lazygit after an editor or shell it started
+      promptToReturnFromSubprocess = false;
 
       gui = {
         nerdFontsVersion = "3";
+        showRandomTip = false;
 
         # cendre (hard), https://github.com/Aejkatappaja/cendre; the same
         # palette as foot.nix

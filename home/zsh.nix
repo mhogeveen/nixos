@@ -41,17 +41,4 @@
       source ${osConfig.user.flakeDir}/config/zsh/.config/zsh/prompt.zsh
     '';
   };
-
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 }
