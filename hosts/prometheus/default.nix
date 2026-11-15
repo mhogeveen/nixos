@@ -60,6 +60,8 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
+    # many headsets only report their battery level to bluez with this on
+    settings.General.Experimental = true;
   };
   hardware.i2c.enable = true;
 
