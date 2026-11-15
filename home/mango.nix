@@ -218,6 +218,11 @@ in
       repeat_delay = 225;
       xkb_rules_layout = "us";
 
+      # a fullscreen window (video, a game) on a shown workspace keeps
+      # hypridle from dimming, locking or suspending, like the shell's Idle
+      # switch does by hand; off by default
+      idle_inhibit_when_fullscreen = 1;
+
       # appearance
       gap_inner_horizontal = 4;
       gap_inner_vertical = 4;
