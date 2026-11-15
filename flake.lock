@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "cendre": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790200848,
+        "narHash": "sha256-+enyAdaAzuirX00m8o/0sOEfGtV4Rm96F7syyBPL9s0=",
+        "owner": "Aejkatappaja",
+        "repo": "cendre",
+        "rev": "5c9d924a4c75c130a1c812ee3e240d78a92d2c3a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aejkatappaja",
+        "repo": "cendre",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -153,6 +169,7 @@
     "root": {
       "inputs": {
         "amane": "amane",
+        "cendre": "cendre",
         "home-manager": "home-manager",
         "mangowm": "mangowm",
         "nixpkgs": "nixpkgs",

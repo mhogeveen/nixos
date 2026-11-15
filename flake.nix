@@ -14,6 +14,11 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # the cendre colour scheme's extras (bat theme for delta's syntax highlighting)
+    cendre = {
+      url = "github:Aejkatappaja/cendre";
+      flake = false;
+    };
     amane = {
       url = "github:MystiaFin/amane";
       inputs.nixpkgs.follows = "nixpkgs";

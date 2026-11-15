@@ -2,6 +2,7 @@
 {
   imports = [
     ./cursor.nix
+    ./delta.nix
     ./foot.nix
     ./git.nix
     ./gtk.nix

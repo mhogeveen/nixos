@@ -14,10 +14,4 @@
       diff.algorithm = "histogram";
     };
   };
-
-  # syntax-highlighted diffs, as git's pager
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-  };
 }

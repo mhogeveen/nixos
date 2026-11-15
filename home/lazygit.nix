@@ -4,11 +4,11 @@
     enable = true;
 
     settings = {
-      # delta from git.nix renders the diffs
+      # delta (delta.nix) renders the diffs, with the options from git config
       git.diffRenderers = [
         {
           colorArg = "always";
-          command = "${config.programs.delta.package}/bin/delta --dark --paging=never";
+          command = "${config.programs.delta.package}/bin/delta --paging=never";
         }
       ];
 
