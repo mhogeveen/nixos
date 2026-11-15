@@ -22,7 +22,6 @@
     gcc
     go
     jq
-    lazygit
     nodejs
     opencode
     pkgs-unstable.claude-code

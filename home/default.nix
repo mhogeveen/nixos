@@ -6,6 +6,7 @@
     ./git.nix
     ./gtk.nix
     ./hypridle.nix
+    ./lazygit.nix
     ./mango.nix
     ./neovim.nix
     ./packages.nix
