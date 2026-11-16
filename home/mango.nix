@@ -237,9 +237,12 @@ in
       # tile,scroller,grid,deck,monocle,center_tile,vertical_tile,vertical_scroller
       tag_rule = map (i: "id:${toString i},layout_name:scroller") workspaces;
 
-      # satty (screenshot annotation, the shell's "Region (annotate)") floats,
-      # centered and sized to the capture by satty itself, instead of tiling
-      window_rule = [ "is_floating:1,app_id:com.gabm.satty" ];
+      # satty and 1password float, centered and sized
+      # to the capture by satty itself, instead of tiling
+      window_rule = [
+	"is_floating:1,app_id:com.gabm.satty"
+	"is_floating:1,app_id:1password,width:1100,height:800"
+      ];
     };
 
     extraConfig = lib.concatMapStrings renderGroup keybinds;

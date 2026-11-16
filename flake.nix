@@ -44,6 +44,8 @@
       # pkgs-unstable (a separate instantiation doesn't inherit nixpkgs.config).
       unfreePackages = [
         "claude-code"
+        "1password"
+        "1password-cli"
       ];
       allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) unfreePackages;
 

@@ -59,7 +59,7 @@
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    powerOnBoot = true;
     # many headsets only report their battery level to bluez with this on
     settings.General.Experimental = true;
   };
@@ -74,6 +74,7 @@
     };
   };
   services.tailscale.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   users.users.${config.user.name} = {
     isNormalUser = true;
@@ -103,6 +104,14 @@
     };
   };
   programs.mango.enable = true;
+
+  # system modules, not home.packages: they install the setgid wrapper and
+  # polkit policy needed for system-auth unlock, `op` CLI and browser integration
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ config.user.name ];
+  };
 
   # dconf's D-Bus service; home-manager writes the GTK dark mode and cursor
   # settings (gtk.nix, cursor.nix) into it. niri used to enable this implicitly
