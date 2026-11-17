@@ -1,6 +1,5 @@
 {
   config,
-  osConfig,
   pkgs,
   pkgs-unstable,
   ...
@@ -29,6 +28,7 @@
     rustup
     unzip
     rtk
+    cliamp
 
     # screenshots and screen recordings (the shell's screenshot menu)
     grim
@@ -39,5 +39,5 @@
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
 
   xdg.configFile."amane".source =
-    config.lib.file.mkOutOfStoreSymlink "${osConfig.user.flakeDir}/config/amane/.config/amane";
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/pyrrha";
 }
