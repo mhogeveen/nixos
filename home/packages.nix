@@ -34,6 +34,7 @@
     grim
     slurp
     wf-recorder
+    ffmpeg
   ];
 
   home.sessionPath = [ "${config.home.homeDirectory}/.cargo/bin" ];
