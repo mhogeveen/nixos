@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ config, inputs, lib, ... }:
 let
   # the keybinds, as groups rendered into extraConfig: "# heading" (plus any
   # comment lines) and then the group's bind lines. the amane shell's keybind
@@ -30,6 +30,7 @@ let
       lines = [
         "bind=SUPER,b,spawn,firefox"
         "bind=SUPER,t,spawn,footclient"
+        "bind=SUPER,Return,spawn_shell,1password --quick-access"
       ];
     }
     {
@@ -247,4 +248,11 @@ in
 
     extraConfig = lib.concatMapStrings renderGroup keybinds;
   };
+
+  # reload mango after a rebuild; activation runs outside the session, so point mmsg at the socket
+  home.activation.reloadMango = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    for sock in /run/user/$UID/mango-*.sock; do
+      MANGO_INSTANCE_SIGNATURE="$sock" run ${config.wayland.windowManager.mango.package}/bin/mmsg dispatch reload_config >/dev/null 2>&1 || true
+    done
+  '';
 }
