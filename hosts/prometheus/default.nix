@@ -125,7 +125,11 @@
   # realtime scheduling for PipeWire (enabled by the graphical desktop defaults)
   security.rtkit.enable = true;
 
-  services.fwupd.enable = true;
+  services.fwupd = {
+    enable = true;
+    # Secure Boot is off on this machine, so dbx updates are pointless (and fail: NVRAM too full)
+    daemonSettings.DisabledPlugins = [ "uefi_dbx" ];
+  };
   # SMART checks on the one SSD; warnings land in the journal
   services.smartd.enable = true;
 
