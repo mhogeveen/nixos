@@ -38,7 +38,8 @@
     # read from the checkout at runtime (not a store copy), so prompt edits
     # apply in new shells without a rebuild, like the other dotfiles
     initContent = ''
-      source ${osConfig.user.flakeDir}/config/zsh/.config/zsh/prompt.zsh
+      [[ -f "${osConfig.user.flakeDir}/config/zsh/.config/zsh/prompt.zsh" ]] && source "${osConfig.user.flakeDir}/config/zsh/.config/zsh/prompt.zsh"
+      [[ -f "${osConfig.user.flakeDir}/config/zsh/.config/zsh/env.zsh" ]] && source "${osConfig.user.flakeDir}/config/zsh/.config/zsh/env.zsh"
     '';
   };
 }
