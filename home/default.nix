@@ -9,6 +9,7 @@
     ./foot.nix
     ./fzf.nix
     ./git.nix
+    ./gpg.nix
     ./gtk.nix
     ./hypridle.nix
     ./lazygit.nix
