@@ -5,6 +5,9 @@
   inputs,
   ...
 }:
+let
+  strata = inputs.strata.packages.${pkgs.stdenv.hostPlatform.system}.default;
+in
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -75,6 +78,18 @@
   };
   services.tailscale.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  # trash, network shares and drive discovery in strata's sidebar (udisks2 is already on)
+  services.gvfs.enable = true;
+
+  # strata (home/strata.nix): its open/save dialog portal, gtk as fallback. the key goes
+  # under mango because mango-portals.conf (from the mango module) overrides `common`
+  xdg.portal.extraPortals = [ strata.fileChooserPortal ];
+  xdg.portal.config.mango."org.freedesktop.impl.portal.FileChooser" = [
+    "strata"
+    "gtk"
+  ];
+  # org.freedesktop.FileManager1, so "show in folder" opens strata
+  services.dbus.packages = [ strata.fileManagerService ];
 
   users.users.${config.user.name} = {
     isNormalUser = true;
@@ -165,6 +180,8 @@
   environment.systemPackages = with pkgs; [
     wget
     wl-clipboard
+    # system-side so the binary matches the portal and D-Bus files above
+    strata
     # amane's own wrapper bundles cargo + rustc (~1.6 GiB) so its CLI can build the config;
     # re-wrap it without them so it uses the rustup toolchain from home/packages.nix instead
     (inputs.amane.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {

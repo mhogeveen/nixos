@@ -30,6 +30,7 @@ let
       lines = [
         "bind=SUPER,b,spawn,firefox"
         "bind=SUPER,t,spawn,footclient"
+        "bind=SUPER,e,spawn,strata"
         "bind=SUPER,Return,spawn_shell,1password --quick-access"
       ];
     }

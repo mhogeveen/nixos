@@ -190,7 +190,8 @@
         "home-manager": "home-manager",
         "mangowm": "mangowm",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "strata": "strata"
       }
     },
     "scenefx": {
@@ -213,6 +214,26 @@
       "original": {
         "owner": "wlrfx",
         "repo": "scenefx",
+        "type": "github"
+      }
+    },
+    "strata": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794891220,
+        "narHash": "sha256-dhkpWXxwZV90id7gmz+n8+XnVBeP2lc+YZjiSYbD3vE=",
+        "owner": "lgse",
+        "repo": "strata",
+        "rev": "7cc1543e9c4bc00e68f1525b0b3d47f4624bc375",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lgse",
+        "repo": "strata",
         "type": "github"
       }
     },

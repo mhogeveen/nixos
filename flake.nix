@@ -28,6 +28,11 @@
       url = "github:MystiaFin/amane";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    strata = {
+      url = "github:lgse/strata";
+      # needs a newer rustc than 26.05 ships
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
