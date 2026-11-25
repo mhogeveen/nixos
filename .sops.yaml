@@ -1,0 +1,11 @@
+# who can decrypt the files in secrets/ (home/sops.nix). a key here is the public
+# half of an age key; the private half stays on its machine
+# (~/.config/sops/age/keys.txt). after adding or removing a key:
+#   sops updatekeys secrets/secrets.yaml
+keys:
+  - &prometheus age184adsnwa75hm69js6jr3y7hyxnnc9qyezs7pas8xr03squy58gmqf4wgeg
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *prometheus

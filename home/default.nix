@@ -18,6 +18,7 @@
     ./neovim.nix
     ./packages.nix
     ./satty.nix
+    ./sops.nix
     ./strata.nix
     ./wlsunset.nix
     ./yazi.nix

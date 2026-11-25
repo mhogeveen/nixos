@@ -38,6 +38,11 @@
     # nixpkgs update here doesn't rebuild it (about 40 minutes on this machine).
     # over ssh while the repository is private; github:mhogeveen/aoide once public
     aoide.url = "git+ssh://git@github.com/mhogeveen/aoide";
+    # secrets kept encrypted in this repository and decrypted at login (home/sops.nix)
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
