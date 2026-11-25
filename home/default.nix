@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./aoide.nix
     ./btop.nix
     ./cursor.nix
     ./delta.nix

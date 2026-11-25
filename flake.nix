@@ -33,6 +33,11 @@
       # needs a newer rustc than 26.05 ships
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    # the aoide music player (home/aoide.nix). no follows on purpose: with its own
+    # locked nixpkgs and crane it is the build its checks ran against, and a
+    # nixpkgs update here doesn't rebuild it (about 40 minutes on this machine).
+    # over ssh while the repository is private; github:mhogeveen/aoide once public
+    aoide.url = "git+ssh://git@github.com/mhogeveen/aoide";
   };
 
   outputs =
