@@ -1,4 +1,10 @@
-{ config, inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  osConfig,
+  ...
+}:
 let
   # the keybinds, as groups rendered into extraConfig: "# heading" (plus any
   # comment lines) and then the group's bind lines. the amane shell's keybind
@@ -202,7 +208,8 @@ in
     # floats are strings, toKeyValue would print 1.0 as 1.000000
     settings = {
       xwayland_ignore_scale = 1;
-      monitor_rule = "name:DP-1,width:3840,height:2160,refresh:60,x:0,y:0,primary:1,scale:1.5";
+      # the name of the output differs per host (modules/user.nix)
+      monitor_rule = "name:${osConfig.user.monitor.output},width:3840,height:2160,refresh:60,x:0,y:0,primary:1,scale:1.5";
 
       animations = 0;
 

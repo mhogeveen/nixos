@@ -31,5 +31,21 @@ in
         example = 5.2;
       };
     };
+
+    # the monitor is the same on every host; where it shows up depends on the
+    # port it is plugged into
+    monitor = {
+      output = mkOption {
+        type = types.str;
+        description = "The compositor's name for the output the monitor is on (`nix run nixpkgs#wlr-randr`).";
+        example = "DP-1";
+      };
+
+      i2cBus = mkOption {
+        type = types.ints.unsigned;
+        description = "The i2c bus the monitor answers DDC/CI on (`ddcutil detect`), for dimming before the lock.";
+        example = 5;
+      };
+    };
   };
 }

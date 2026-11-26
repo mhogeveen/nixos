@@ -1,12 +1,12 @@
-{ pkgs, ... }:
+{ osConfig, pkgs, ... }:
 let
   # mango has wlr-output-power-management: this powers the screen down like
   # dpms, without removing the output the way `mmsg dispatch disable_monitor` does
   wlopm = "${pkgs.wlopm}/bin/wlopm";
 
-  # the i2c bus the monitor answers on (amane's docs/machine.md) and how far to
-  # dim before the lock
-  monitorBus = "5";
+  # the i2c bus the monitor answers on, per host (modules/user.nix), and how far
+  # to dim before the lock
+  monitorBus = toString osConfig.user.monitor.i2cBus;
   dimLevel = "10";
 
   # dims the monitor over DDC/CI before the lock and puts back the level it had

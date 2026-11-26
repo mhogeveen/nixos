@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  # the package, portal and FileManager1 service are system-side (hosts/prometheus);
+  # the package, portal and FileManager1 service are system-side (hosts/common.nix);
   # this only makes strata the handler for folders (xdg-open on a directory)
   xdg.mimeApps = {
     enable = true;

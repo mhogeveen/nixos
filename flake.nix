@@ -68,31 +68,40 @@
         inherit system;
         config = { inherit allowUnfreePredicate; };
       };
+
+      # a host: the shared modules plus its own folder in hosts/
+      mkHost =
+        host:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs pkgs-unstable; };
+          modules = [
+            ./modules/user.nix
+            ./hosts/common.nix
+            ./hosts/${host}
+            mangowm.nixosModules.mango
+            home-manager.nixosModules.home-manager
+            (
+              { config, ... }:
+              {
+                nixpkgs.config = { inherit allowUnfreePredicate; };
+
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs pkgs-unstable; };
+                  users.${config.user.name} = import ./home;
+                  backupFileExtension = "backup";
+                };
+              }
+            )
+          ];
+        };
     in
     {
-      nixosConfigurations.prometheus = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs pkgs-unstable; };
-        modules = [
-          ./modules/user.nix
-          ./hosts/prometheus
-          mangowm.nixosModules.mango
-          home-manager.nixosModules.home-manager
-          (
-            { config, ... }:
-            {
-              nixpkgs.config = { inherit allowUnfreePredicate; };
-
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs pkgs-unstable; };
-                users.${config.user.name} = import ./home;
-                backupFileExtension = "backup";
-              };
-            }
-          )
-        ];
-      };
+      nixosConfigurations = nixpkgs.lib.genAttrs [
+        "prometheus"
+        "daedalus"
+      ] mkHost;
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
     };
