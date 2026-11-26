@@ -1,9 +1,15 @@
-{ ... }:
+{ lib, ... }:
 {
   # from `nixos-generate-config --show-hardware-config` on this machine
   imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "daedalus";
+
+  # this firmware puts its own "UEFI OS" entry (the fallback path,
+  # EFI/BOOT/BOOTX64.EFI) ahead of NixOS-boot, so GRUB goes to that path
+  # instead of into a boot entry of its own
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
 
   # modules/user.nix. copied from prometheus, so check both on this machine:
   # `nix run nixpkgs#wlr-randr` for the output's name, `ddcutil detect` for the bus
