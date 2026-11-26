@@ -4,8 +4,10 @@
 #   sops updatekeys secrets/secrets.yaml
 keys:
   - &prometheus age184adsnwa75hm69js6jr3y7hyxnnc9qyezs7pas8xr03squy58gmqf4wgeg
+  - &daedalus age1zlamdaxkme3xch8qeygwk086evr0lvrkqvuq54hkrg2mdv29lu9slu8d8g
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:
           - *prometheus
+          - *daedalus
