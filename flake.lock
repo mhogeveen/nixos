@@ -26,11 +26,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1795594548,
-        "narHash": "sha256-AftFZQdoHg/3bPrfYAo02kx2tyVAe8YkyR3bj3uj3hg=",
+        "lastModified": 1795621358,
+        "narHash": "sha256-nvPn00naRuUboMl5iESc/sbanQ3i/5arLeYiHcWQcJA=",
         "ref": "refs/heads/main",
-        "rev": "154f846d09f9f45b0445b47c9092eaf735cf444b",
-        "revCount": 75,
+        "rev": "6c7ccb3926e1026c86b7c84705e543960940a321",
+        "revCount": 90,
         "type": "git",
         "url": "ssh://git@github.com/mhogeveen/aoide"
       },
